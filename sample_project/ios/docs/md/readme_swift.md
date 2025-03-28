@@ -1,13 +1,13 @@
 ## unisizeSDK for iOS Swift 用サンプルコードについて
 unisizeSDK for iOS Swift を使用して unisize の各機能を利用するための簡単なサンプルアプリケーションのプロジェクトです。
 unisizeSDK を Swift で実装する場合の実装サンプルとして、また、機能テスト用としてご利用いただけます。  
-  
+
+※ 本プロジェクトの動作には unisizeSDK v2.0以降が必要です。
 ※ SDKに付属している「導入手順」「SDKリファレンス」も合わせてご確認ください。  
 
 ## 使用しているSDK
-* unisizeSDK for iOS Swift  
-
-※ unisizeSDK の利用には unisize が発行したクライアント識別ID（CID）が必要です。
+* unisizeSDK for iOS Swift（v2.0以降）  
+  ※ unisizeSDK の利用には unisize が発行したクライアント識別ID（CID）が必要です。
 
 ## プロジェクト内の主なファイル
 * ViewController.swift  
@@ -25,7 +25,7 @@ USBでiPhone実機を繋いで起動する場合は、事前に
 
 ## unisizeバナーの表示テスト
 unisizeSDK Sample App > unisizeSDK Sample App > ViewController.swift  
-L28〜付近  
+L20〜  
   
 下記の部分に「クライアントID」、「アイテム識別ID」を設定して起動して下さい。  
 unisizeバナーが表示されます。  
@@ -39,20 +39,27 @@ unisizeバナーが表示されます。
   
 ## CVタグの発火テスト
 unisizeSDK Sample App > unisizeSDK Sample App > CVTagTestViewController.swift
-L27〜付近  
+L20〜  
 
-下記の部分に「クライアントID」、「クライアント会員ID」、「購入ID」、「購入数」、「アイテム識別ID」、「価格」、「サイズ」を設定して起動すると、画面表示時にCVタグが発火します。  
+下記の部分に「クライアントID」、「ECサイトのユーザー識別ID」、「購入ID」、「商品ごとの購入数」、「商品識別ID（商品ごと）」、「商品ごとの価格」、「サイズ情報（商品ごと）」を設定して起動すると、画面表示時にCVタグが発火します。  
 ※ 実際に購入として集計されるため、起動する場合は、unisize が発行したテスト用クライアント識別ID（CID）を使用して実行して下さい。  
   
 ```swift
-   let cid: String = ""  // クライアントID（makip発行のクライアント個別ID）
-   let cuid: String = "" // クライアント会員ID（ユーザーを識別する固有ID）
-   let purchaseid: String = "" // 購入ID（注文時に発行される固有ID）
-   let itemnum: [String] = [] // 購入数（商品ごとにString配列で渡します。）
-   let itemid: [String] = [] // アイテム識別ID（商品ごとにString配列で渡します。）
-   let price: [String] = [] // 価格（商品ごとにString配列で渡します。）
-   let size: [String] = [] // サイズ（商品ごとにString配列で渡します。）
-   let iteminfo: String = "" // itemnum、itemid、price、sizeを1つにまとめたデータで送信する場合
-   let iteminfojson: String = "" // itemnum、itemid、price、sizeを1つにまとめたJSONデータで送信する場合
-   let regType: String = ""
+    let cid: String = "" // クライアントID
+    let cuid: String = "" // ECサイトのユーザー識別ID
+    let purchaseid: String = ""  // 購入ID
+
+    // 商品ごとのパラメータ（String配列）
+    let itemnum: [String] = [] // 商品ごとの購入数
+    let itemid: [String] = [] // 商品識別ID（商品ごと）
+    let price: [String] = [] // 商品ごとの価格
+    let size: [String] = [] // サイズ情報（商品ごと）
+
+    // iteminfo形式（まとめて送信する場合用）
+    let iteminfo: String = "" // ※通常は使用しない
+    let iteminfojson: String = "" // ※通常は使用しない
+    let regType: String = "" // ※通常は使用しない
 ```
+  
+- 送信すると実際に購入として集計されるため、起動する場合は、unisize が発行したテスト用クライアント識別ID（CID）を使用して実行して下さい。  
+- iPhone 端末と Mac を繋いで Safari を使った開発モードを使うと、開発ツールのネットワークタブでトラッキングが送信されているかの確認が可能です。「tracking」という項目を選択すると送信された情報などを確認できます。 

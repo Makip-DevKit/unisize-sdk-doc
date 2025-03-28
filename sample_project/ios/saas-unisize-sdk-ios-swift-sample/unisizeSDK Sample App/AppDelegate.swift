@@ -1,8 +1,3 @@
-//
-//  AppDelegate.swift
-//  unisizeSDK Sample App
-//
-
 import UIKit
 
 @main

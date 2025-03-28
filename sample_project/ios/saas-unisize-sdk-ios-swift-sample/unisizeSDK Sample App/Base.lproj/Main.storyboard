@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -26,16 +26,16 @@
                                             <constraint firstAttribute="height" constant="1500" id="IX4-CC-alp"/>
                                         </constraints>
                                     </imageView>
-                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Xf-O7-q5W">
-                                        <rect key="frame" x="16" y="351" width="361" height="60"/>
+                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Xf-O7-q5W" customClass="UnisizeBannerWebview" customModule="unisizeSDK">
+                                        <rect key="frame" x="16" y="351" width="361" height="10"/>
                                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                     </view>
-                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Ys-Hz-ndz">
-                                        <rect key="frame" x="16" y="469" width="361" height="180"/>
+                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Ys-Hz-ndz" customClass="UnisizeBannerWebview" customModule="unisizeSDK">
+                                        <rect key="frame" x="16" y="381" width="361" height="10"/>
                                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                     </view>
-                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="93q-Lk-Wxf">
-                                        <rect key="frame" x="16" y="686" width="361" height="300"/>
+                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="93q-Lk-Wxf" customClass="UnisizeBannerWebview" customModule="unisizeSDK">
+                                        <rect key="frame" x="16" y="411" width="361" height="10"/>
                                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IPk-4K-gpZ">
@@ -138,6 +138,7 @@
                                     </label>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="ua7-5o-ma8" firstAttribute="trailing" secondItem="0Ys-Hz-ndz" secondAttribute="trailing" constant="16" id="3CS-E9-2Ag"/>
                                     <constraint firstItem="Hhn-nN-ai4" firstAttribute="top" secondItem="1tr-Ng-Rhm" secondAttribute="bottom" constant="19" id="4mA-Ov-T57"/>
                                     <constraint firstItem="IPk-4K-gpZ" firstAttribute="top" secondItem="7eT-9T-BYI" secondAttribute="bottom" constant="5" id="5tr-6g-cwd"/>
                                     <constraint firstItem="rnv-gA-Hes" firstAttribute="top" secondItem="lXD-0f-9yK" secondAttribute="bottom" constant="22" id="8L3-SC-6h9"/>
@@ -146,8 +147,9 @@
                                     <constraint firstItem="5pl-zH-ouP" firstAttribute="leading" secondItem="X4h-ug-3xS" secondAttribute="leading" id="Fno-rM-pgk"/>
                                     <constraint firstItem="5pl-zH-ouP" firstAttribute="width" secondItem="X4h-ug-3xS" secondAttribute="width" id="HpA-V4-dky"/>
                                     <constraint firstItem="lXD-0f-9yK" firstAttribute="leading" secondItem="Nha-vb-jSA" secondAttribute="trailing" constant="2" id="I7G-KU-How"/>
+                                    <constraint firstItem="7Xf-O7-q5W" firstAttribute="leading" secondItem="ua7-5o-ma8" secondAttribute="leading" constant="16" id="Nby-Va-Ttb"/>
                                     <constraint firstItem="e3O-bf-NX7" firstAttribute="top" secondItem="Hhn-nN-ai4" secondAttribute="bottom" constant="28" id="Ndm-wR-uUo"/>
-                                    <constraint firstItem="93q-Lk-Wxf" firstAttribute="top" secondItem="0Ys-Hz-ndz" secondAttribute="bottom" constant="37" id="PHs-2H-yjD"/>
+                                    <constraint firstItem="93q-Lk-Wxf" firstAttribute="top" secondItem="0Ys-Hz-ndz" secondAttribute="bottom" constant="20" id="PHs-2H-yjD"/>
                                     <constraint firstItem="ua7-5o-ma8" firstAttribute="trailing" secondItem="lXD-0f-9yK" secondAttribute="trailing" constant="16" id="S1j-9B-3Oh"/>
                                     <constraint firstItem="rnv-gA-Hes" firstAttribute="leading" secondItem="McR-LV-zWy" secondAttribute="trailing" constant="2" id="U3o-zO-uGB"/>
                                     <constraint firstAttribute="trailing" secondItem="1tr-Ng-Rhm" secondAttribute="trailing" constant="16" id="UbS-RH-Y9p"/>
@@ -163,17 +165,21 @@
                                     <constraint firstItem="1tr-Ng-Rhm" firstAttribute="leading" secondItem="H0b-Rt-WUt" secondAttribute="trailing" constant="2" id="ewg-YS-32S"/>
                                     <constraint firstItem="Nha-vb-jSA" firstAttribute="top" secondItem="B9j-Lx-nV8" secondAttribute="bottom" constant="35" id="h0C-B6-48I"/>
                                     <constraint firstAttribute="trailing" secondItem="fVg-i8-f65" secondAttribute="trailing" constant="16" id="itj-9C-tEm"/>
+                                    <constraint firstItem="93q-Lk-Wxf" firstAttribute="leading" secondItem="ua7-5o-ma8" secondAttribute="leading" constant="16" id="jvF-bu-fBa"/>
                                     <constraint firstAttribute="trailing" secondItem="rnv-gA-Hes" secondAttribute="trailing" constant="16" id="kBQ-3J-TJQ"/>
                                     <constraint firstItem="B9j-Lx-nV8" firstAttribute="leading" secondItem="X4h-ug-3xS" secondAttribute="leading" constant="16" id="l2a-fs-lWI"/>
                                     <constraint firstItem="IPk-4K-gpZ" firstAttribute="leading" secondItem="ua7-5o-ma8" secondAttribute="leading" constant="16" id="lcd-DQ-l1r"/>
+                                    <constraint firstItem="ua7-5o-ma8" firstAttribute="trailing" secondItem="93q-Lk-Wxf" secondAttribute="trailing" constant="16" id="loe-fc-d5M"/>
                                     <constraint firstItem="ua7-5o-ma8" firstAttribute="trailing" secondItem="IPk-4K-gpZ" secondAttribute="trailing" constant="16" id="m4q-XB-mpG"/>
                                     <constraint firstAttribute="trailing" secondItem="Hhn-nN-ai4" secondAttribute="trailing" constant="16" id="nFB-Q9-zL0"/>
-                                    <constraint firstItem="7eT-9T-BYI" firstAttribute="top" secondItem="93q-Lk-Wxf" secondAttribute="bottom" constant="8" id="rZa-cN-05s"/>
+                                    <constraint firstItem="ua7-5o-ma8" firstAttribute="trailing" secondItem="7Xf-O7-q5W" secondAttribute="trailing" constant="16" id="phu-iN-fhs"/>
+                                    <constraint firstItem="7eT-9T-BYI" firstAttribute="top" secondItem="93q-Lk-Wxf" secondAttribute="bottom" constant="20" id="rZa-cN-05s"/>
                                     <constraint firstItem="fVg-i8-f65" firstAttribute="leading" secondItem="B9j-Lx-nV8" secondAttribute="trailing" constant="2" id="reK-c4-7ks"/>
                                     <constraint firstItem="lXD-0f-9yK" firstAttribute="top" secondItem="fVg-i8-f65" secondAttribute="bottom" constant="22" id="szH-Gu-MQr"/>
                                     <constraint firstItem="7Xf-O7-q5W" firstAttribute="top" secondItem="e3O-bf-NX7" secondAttribute="bottom" constant="17" id="wIi-MI-PHU"/>
-                                    <constraint firstItem="0Ys-Hz-ndz" firstAttribute="top" secondItem="7Xf-O7-q5W" secondAttribute="bottom" constant="58" id="yGL-I4-8et"/>
+                                    <constraint firstItem="0Ys-Hz-ndz" firstAttribute="top" secondItem="7Xf-O7-q5W" secondAttribute="bottom" constant="20" id="yGL-I4-8et"/>
                                     <constraint firstItem="Nha-vb-jSA" firstAttribute="leading" secondItem="X4h-ug-3xS" secondAttribute="leading" constant="16" id="yYF-rE-MyV"/>
+                                    <constraint firstItem="0Ys-Hz-ndz" firstAttribute="leading" secondItem="ua7-5o-ma8" secondAttribute="leading" constant="16" id="zfF-FH-cku"/>
                                     <constraint firstItem="H0b-Rt-WUt" firstAttribute="leading" secondItem="X4h-ug-3xS" secondAttribute="leading" constant="16" id="ziA-g3-24E"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="rbI-2x-erN"/>
@@ -192,13 +198,13 @@
                     <size key="freeformSize" width="393" height="1500"/>
                     <connections>
                         <outlet property="bannerLabel" destination="e3O-bf-NX7" id="31c-yw-Kv6"/>
-                        <outlet property="ciBannerRect" destination="93q-Lk-Wxf" id="Am0-IO-2C1"/>
+                        <outlet property="ciBannerWebview" destination="93q-Lk-Wxf" id="KsK-0l-9kA"/>
                         <outlet property="cidTextField" destination="lXD-0f-9yK" id="zxF-XL-mRn"/>
                         <outlet property="cuidTextField" destination="rnv-gA-Hes" id="lac-Zt-V7b"/>
-                        <outlet property="exBannerRect" destination="0Ys-Hz-ndz" id="XEi-Ia-y2p"/>
+                        <outlet property="exBannerWebview" destination="0Ys-Hz-ndz" id="Ixd-Zw-8wO"/>
                         <outlet property="itmTextField" destination="fVg-i8-f65" id="Vpz-fD-4Bc"/>
                         <outlet property="langTextField" destination="1tr-Ng-Rhm" id="CtC-Mc-M6P"/>
-                        <outlet property="textBannerRect" destination="7Xf-O7-q5W" id="wDi-ja-GGW"/>
+                        <outlet property="textBannerWebview" destination="7Xf-O7-q5W" id="fgY-I0-5ie"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -258,7 +264,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

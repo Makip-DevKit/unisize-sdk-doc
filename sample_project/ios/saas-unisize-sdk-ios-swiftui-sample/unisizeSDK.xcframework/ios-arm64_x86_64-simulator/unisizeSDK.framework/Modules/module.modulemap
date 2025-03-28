@@ -1,0 +1,11 @@
+framework module unisizeSDK {
+  umbrella header "unisizeSDK.h"
+  export *
+
+  module * { export * }
+}
+
+module unisizeSDK.Swift {
+  header "unisizeSDK-Swift.h"
+  requires objc
+}

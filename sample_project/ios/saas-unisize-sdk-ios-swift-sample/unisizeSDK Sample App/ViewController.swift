@@ -1,95 +1,138 @@
-//
-//  ViewController.swift
-//  unisizeSDK Sample App
-//
-
 import UIKit
 import WebKit
-import unisizeSDK // unisizeSDK
+import unisizeSDK
 
-/*
-    Main.storyboardの ViewController class
-*/
+// MARK: - ViewController（Main.storyboardの ViewController）
 class ViewController: UIViewController {
-    // UnisizeBanner インスタンス
-    var unisizeBanner: UnisizeBanner!
     
-    // IBOutlet変数
-    @IBOutlet weak var textBannerRect: UIView!
-    @IBOutlet weak var exBannerRect: UIView!
-    @IBOutlet weak var ciBannerRect: UIView!
+    // MARK: - IBOutlet変数（Storyboardと接続）
+    @IBOutlet weak var textBannerWebview: UnisizeBannerWebview!
+    @IBOutlet weak var exBannerWebview: UnisizeBannerWebview!
+    @IBOutlet weak var ciBannerWebview: UnisizeBannerWebview!
+    
     @IBOutlet weak var bannerLabel: UILabel!
     @IBOutlet weak var itmTextField: UITextField!
     @IBOutlet weak var cidTextField: UITextField!
     @IBOutlet weak var cuidTextField: UITextField!
     @IBOutlet weak var langTextField: UITextField!
     
-    // unisizeBanner 用パラメーター
+    // MARK: - unisizeバナー用パラメータ
     var cid: String = "" // クライアントID
-    var itm: String = "" // アイテム識別ID
-    var cuid: String = "" // クライアント会員ID
-    var lang: String = "" // 表示言語(オプション)
+    var itm: String = "" // 商品識別ID
+    var cuid: String = "" // ECサイトのユーザー識別ID
+    var lang: String = "" // 表示言語（Default：ja）
+    var enableWebViewLog: Bool = true // WebView内のconsole.logをXcodeに出力
+    var enablePrintLog: Bool = true // SDKの内部ログ出力を有効化
+    var sendErrorLog: Bool = true // エラーログ送信を有効化
+    var customStyle: String = "" // カスタムCSS（非推奨）
     
-    // バナーにカスタムスタイル（css）を適用（v1.2から利用可能）
-    // ※ 付属のドキュメントをご確認ください。
-    var customStyle: String = ""
+    // MARK: - 高さ制約（各バナー用）
+    var textBannerWebviewHeightConstraint: NSLayoutConstraint!
+    var exBannerWebviewHeightConstraint: NSLayoutConstraint!
+    var ciBannerWebviewHeightConstraint: NSLayoutConstraint!
     
-    // NSLayoutConstraint 変数
-    var textBannerRectHeightConstraint: NSLayoutConstraint!
-    var exBannerRectHeightConstraint: NSLayoutConstraint!
-    var ciBannerRectHeightConstraint: NSLayoutConstraint!
-    
+    // MARK: - ライフサイクルメソッド
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("ViewController > viewDidLoad()")
         
-        // textBannerRect のレイアウト設定
-        textBannerRect.translatesAutoresizingMaskIntoConstraints = false
-        textBannerRectHeightConstraint = textBannerRect.heightAnchor.constraint(equalToConstant: 60)
+        // WebViewのインスペクタ有効化（Safariでデバッグ可能）
+        UserDefaults.standard.set(true, forKey: "WebKitDeveloperExtras")
+
+        // 共通設定
+        let bannerWebviews: [UnisizeBannerWebview?] = [textBannerWebview, exBannerWebview, ciBannerWebview]
+        bannerWebviews.forEach { banner in
+            banner?.translatesAutoresizingMaskIntoConstraints = false
+        }
+
+        // 各バナーの高さ制約（初期は非表示=高さ0）
+        textBannerWebviewHeightConstraint = textBannerWebview?.heightAnchor.constraint(equalToConstant: 0)
+        exBannerWebviewHeightConstraint = exBannerWebview?.heightAnchor.constraint(equalToConstant: 0)
+        ciBannerWebviewHeightConstraint = ciBannerWebview?.heightAnchor.constraint(equalToConstant: 0)
         
-        // exBannerRect のレイアウト設定
-        exBannerRect.translatesAutoresizingMaskIntoConstraints = false
-        exBannerRectHeightConstraint = exBannerRect.heightAnchor.constraint(equalToConstant: 180)
-        
-        ciBannerRect.translatesAutoresizingMaskIntoConstraints = false
-        ciBannerRectHeightConstraint = ciBannerRect.heightAnchor.constraint(equalToConstant: 300)
-        
-        // NSLayoutConstraint の設定
         NSLayoutConstraint.activate([
-            textBannerRect.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            textBannerRect.topAnchor.constraint(equalTo: bannerLabel.bottomAnchor, constant: 16),
-            textBannerRect.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            textBannerRect.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            textBannerRectHeightConstraint,
-            exBannerRect.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            exBannerRect.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            exBannerRect.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            exBannerRectHeightConstraint,
-            ciBannerRect.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            ciBannerRect.topAnchor.constraint(equalTo: exBannerRect.bottomAnchor, constant: 16),
-            ciBannerRect.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            ciBannerRect.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            ciBannerRectHeightConstraint
+            textBannerWebviewHeightConstraint,
+            exBannerWebviewHeightConstraint,
+            ciBannerWebviewHeightConstraint
         ])
+        // ※左右にも制約を設定して横幅を確保しないと、横幅が0になってしまい、バナーが表示されない場合があります。
         
-        // unisizeBanner の初期化とセットアップ
-        unisizeBanner = UnisizeBanner(
-            textBannerRect: textBannerRect, // TEXT バナー用の UIView を渡します
-            exBannerRect: exBannerRect, // EX バナー用の UIView を渡します
-            ciBannerRect: ciBannerRect, // CI バナー用の UIView を渡します
-            parentView: self, // unisizeBanner を配置している ViewController を渡します
-            cid: cid, // クライアントID
-            itm: itm, // アイテム識別ID
-            cuid: cuid, // クライアント会員ID
-            lang: lang, // 表示言語
-            enableWebViewLog: true, // webView の console.log を出力します
-            enablePrintLog: true, // unisizeBanner class のログをコンソールへ出力します
-            sendErrorLog: true, // エラー発生時にエラーログを unisize サーバーへ送信します
-            delegate: self, // delegate
-            customStyle: customStyle // バナーにカスタムスタイル（css）を適用（v1.2）
+        // パラメータ設定
+        createBannerParam()
+        
+        // バナーの表示
+        // ※ TEXTバナー、EXバナー両方使用する場合は、キャッシュ利用の関係で、TEXTバナーの didFinish のタイミングでEXバナーを.show()してください。
+        textBannerWebview?.show()
+        ciBannerWebview?.show()
+    }
+    
+    // ViewControllerを閉じるときの処理
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        print("ViewController > viewWillDisappear")
+        
+        // 各バナーのリソース解放
+        textBannerWebview?.close()
+        exBannerWebview?.close()
+        ciBannerWebview?.close()
+        
+        // 参照をnilにしてメモリ解放
+        textBannerWebview = nil
+        exBannerWebview = nil
+        ciBannerWebview = nil
+    }
+    
+    // MARK: - Unisizeバナー設定処理
+    
+    /// 各バナーのパラメータ生成と初期設定を行う
+    func createBannerParam() {
+        print("ViewController > createBannerParam()")
+        
+        let bannerTypes: [(UnisizeBannerWebview?, String)] = [
+            (textBannerWebview, "text"),
+            (exBannerWebview, "ex"),
+            (ciBannerWebview, "ci")
+        ]
+        
+        // CIバナーは bannerMode から除外
+        let availableBannerTypes = bannerTypes.compactMap { banner, type in
+            (banner != nil && type != "ci") ? type : nil
+        }
+        let bannerMode = availableBannerTypes.joined(separator: ",")
+        
+        // 各バナーへパラメータを設定
+        bannerTypes.forEach { banner, type in
+            if let banner = banner {
+                setupBannerParam(banner: banner, bannerType: type, bannerMode: bannerMode)
+            }
+        }
+    }
+
+    /// 個別のUnisizeバナーへパラメータを設定
+    func setupBannerParam(banner: UnisizeBannerWebview, bannerType: String, bannerMode: String) {
+        print("ViewController > setupBannerParam()")
+        print("bannerType:\(bannerType)")
+        print("bannerMode:\(bannerMode)")
+        
+        banner.setupParam(
+            parentView: self,
+            bannerType: bannerType,
+            bannerMode: bannerMode,
+            cid: cid,
+            itm: itm,
+            cuid: cuid,
+            lang: lang,
+            enableWebViewLog: enableWebViewLog,
+            enablePrintLog: enablePrintLog,
+            sendErrorLog: sendErrorLog,
+            delegate: self,
+            customStyle: customStyle
         )
     }
     
-    // CVTagTestボタンがタップされたときのアクション
+    // MARK: - UIアクション（ボタン等）
+
+    /// CVTagTest画面へ遷移
     @IBAction func cvTagTestTapped(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let cvTagTestViewController = storyboard.instantiateViewController(withIdentifier: "CvTagTestViewControllerID") as? CvTagTestViewController {
@@ -97,89 +140,98 @@ class ViewController: UIViewController {
         }
     }
     
-    // リロードボタンのアクション
+    /// 各バナーのリロード処理
     @IBAction func reloadButton(_ sender: Any) {
-        unisizeBanner.reload()
+        textBannerWebview?.reload()
+        exBannerWebview?.reload()
+        ciBannerWebview?.reload()
     }
     
-    // フォームの送信アクション
+    /// フォームから入力値を取得してバナー再表示
     @IBAction func formSend(_ sender: Any) {
         let cid = cidTextField.text ?? ""
         let itm = itmTextField.text ?? ""
         let cuid = cuidTextField.text ?? ""
         let lang = langTextField.text ?? ""
         
-        unisizeBanner.setupParam(cid: cid, itm: itm, cuid: cuid, lang: lang)
+        self.cid = cid
+        self.itm = itm
+        self.cuid = cuid
+        self.lang = lang
+        
+        createBannerParam()
+        
+        textBannerWebview?.show()
+        ciBannerWebview?.show()
     }
 }
 
-/*
-    UnisizeBannerDelegate 実装
-*/
-extension ViewController: UnisizeBannerDelegate {
-
-    // コンポーネントの処理完了時に実行される
-    func unisizeBanner(_ banner: UnisizeBanner, didFinish message: String) {
+// MARK: - UnisizeBannerWebviewDelegate実装
+extension ViewController: UnisizeBannerWebviewDelegate {
+    
+    // 表示完了時
+    func unisizeBannerWebview(_ banner: UnisizeBannerWebview, didFinish message: String, bannerType: String) {
         print("didFinish: message: \(message)")
+        
+        // EXバナーはTEXTバナー完了後に.show()します。
+        if (bannerType == "text") {
+            exBannerWebview?.show()
+        }
     }
     
-    // コンポーネントの処理失敗時に実行される
-    func unisizeBanner(_ banner: UnisizeBanner, didFail errorObj: UnisizeError)  {
+    // 表示失敗時
+    func unisizeBannerWebview(_ banner: UnisizeBannerWebview, didFail errorObj: UnisizeError) {
         print("didFail: \(errorObj.getJsonString())")
         
-        // バナーを非表示（バナーのUIViewに制約を設定している場合）
-        textBannerRectHeightConstraint.constant = 0
-        textBannerRect.layoutIfNeeded()
-        exBannerRectHeightConstraint.constant = 0
-        exBannerRect.layoutIfNeeded()
-        ciBannerRectHeightConstraint.constant = 0
-        ciBannerRect.layoutIfNeeded()
+        // 高さを0にして非表示にする
+        textBannerWebviewHeightConstraint?.constant = 0
+        textBannerWebview?.layoutIfNeeded()
+        exBannerWebviewHeightConstraint?.constant = 0
+        exBannerWebview?.layoutIfNeeded()
+        ciBannerWebviewHeightConstraint?.constant = 0
+        ciBannerWebview?.layoutIfNeeded()
     }
     
-    // コンポーネントのリサイズ時に実行される
-    func unisizeBanner(_ banner: UnisizeBanner, didResized message: String, width: CGFloat, height: CGFloat, viewType: String) {
-        print("didResized: width: \(width) height: \(height) type: \(viewType)")
+    // バナーのリサイズ時
+    func unisizeBannerWebview(_ banner: UnisizeBannerWebview, didResized message: String, width: CGFloat, height: CGFloat, bannerType: String) {
+        print("didResized: width: \(width) height: \(height) bannerType: \(bannerType)")
         
-        // バナーを表示するための UIView をサイズ変更
-        if viewType == "text_banner" {
-            textBannerRectHeightConstraint.constant = height
-            textBannerRect.layoutIfNeeded()
-        } else if viewType == "ex_banner" {
-            exBannerRectHeightConstraint.constant = height
-            exBannerRect.layoutIfNeeded()
-        } else if (viewType == "ci_banner") {
-            ciBannerRectHeightConstraint.constant = height
-            ciBannerRect.layoutIfNeeded()
+        // 高さ制約を更新してサイズ変更
+        if (bannerType == "text") {
+            textBannerWebviewHeightConstraint.constant = height
+            textBannerWebview.layoutIfNeeded()
+        } else if (bannerType == "ex") {
+            exBannerWebviewHeightConstraint?.constant = height
+            exBannerWebview?.layoutIfNeeded()
+        } else if (bannerType == "ci") {
+            ciBannerWebviewHeightConstraint?.constant = height
+            ciBannerWebview?.layoutIfNeeded()
         }
     }
     
-    // WebView のバナー表示時に毎回通知（バナーのリロードが発生した場合も実行される）
-    func unisizeBanner(_ banner: UnisizeBanner, didLoaded message: String, viewType: String) {
-        print("didLoaded: message: \(message) type: \(viewType)")
-    }
-    
-    // unisize 対象外商品の場合に呼び出される
-    func unisizeBanner(_ banner: UnisizeBanner, didUnsupported message: String) {
+    // unisize対象外の場合
+    func unisizeBannerWebview(_ banner: UnisizeBannerWebview, didUnsupported message: String) {
         print("didUnsupported: \(message)")
         
-        // バナーのUIViewを非表示（バナーのUIViewに制約を設定している場合）
+        // 高さを0にして非表示にする
         if (message == "all") {
-            // TEXTバナーを非表示
-            textBannerRectHeightConstraint.constant = 0
-            textBannerRect.layoutIfNeeded()
-
-            // EXバナーを非表示
-            exBannerRectHeightConstraint.constant = 0
-            exBannerRect.layoutIfNeeded()
+            textBannerWebviewHeightConstraint?.constant = 0
+            textBannerWebview?.layoutIfNeeded()
+            exBannerWebviewHeightConstraint?.constant = 0
+            exBannerWebview?.layoutIfNeeded()
         }
         
-        // CIバナーを非表示
-        ciBannerRectHeightConstraint.constant = 0
-        ciBannerRect.layoutIfNeeded()
+        ciBannerWebviewHeightConstraint?.constant = 0
+        ciBannerWebview?.layoutIfNeeded()
     }
     
-    // beidが変更された場合に呼び出される
-    func unisizeBanner(_ banner: UnisizeBanner, didBeidChanged beid: String, recommendedItems: String, type: String) {
+    // beid変更時
+    func unisizeBannerWebview(_ banner: UnisizeBannerWebview, didBeidChanged beid: String, recommendedItems: String, bannerType type: String) {
         print("didBeidChanged: beid: \(beid) recommendedItems: \(recommendedItems) type: \(type)")
+    }
+    
+    // バナークリック時
+    func unisizeBannerWebview(_ banner: UnisizeBannerWebview, didBannerClicked: String, bannerType: String) {
+        print("didBannerClicked: bannerType: \(bannerType)")
     }
 }

@@ -15,13 +15,9 @@ pluginManagement {
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
-        // maven {
-        //     url = uri("https://maven.pkg.github.com/Makip/unisize-sdk-android-distribute")
-        //     credentials {
-        //         username = System.getenv("GITHUB_USERNAME")
-        //         password = System.getenv("GITHUB_TOKEN")
-        //     }
-        // }
+        maven {
+            url = uri("https://maven.pkg.github.com/Makip-DevKit/unisize-sdk-android")
+        }
 
         google()
         mavenCentral()
@@ -30,4 +26,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "saas-unisize-sdk-android-kotlin-sample"
 include(":app")
- 

@@ -12,7 +12,6 @@ import jp.co.makip.unisizesdk.UnisizeBanner.BannerType
 import java.util.stream.Collectors
 
 class UnisizeFragment : Fragment(R.layout.fragment_unisize) {
-
     // UnisizeBannerのインスタンスを保持
     private lateinit var textWebView: jp.co.makip.unisizesdk.UnisizeBanner
     private var exWebView: jp.co.makip.unisizesdk.UnisizeBanner? = null
@@ -26,16 +25,21 @@ class UnisizeFragment : Fragment(R.layout.fragment_unisize) {
     private var lang: String = ""
 
     // バナーにカスタムスタイルを適用（v1.2）
-    private var customStyle: String = """
+    private var customStyle: String =
+        """
         
-    """.trimIndent()
+        """.trimIndent()
 
-    private val sdkBnrMode = listOf(
-        jp.co.makip.unisizesdk.UnisizeBanner.BannerType.TEXT,
-        jp.co.makip.unisizesdk.UnisizeBanner.BannerType.EX
-    )
+    private val sdkBnrMode =
+        listOf(
+            jp.co.makip.unisizesdk.UnisizeBanner.BannerType.TEXT,
+            jp.co.makip.unisizesdk.UnisizeBanner.BannerType.EX,
+        )
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
         textWebView = view.findViewById(R.id.textWebView)
@@ -49,45 +53,53 @@ class UnisizeFragment : Fragment(R.layout.fragment_unisize) {
 
     // TextWebViewをセットアップするメソッド
     private fun setupTextWebView() {
-        textWebView.listener = object : jp.co.makip.unisizesdk.UnisizeBannerListener {
-            override fun didFinish() {
-                Log.d("MainActivity", "textWebView didFinish()")
-                setupExWebView() // ExWebViewをセットアップして表示
-            }
+        textWebView.listener =
+            object : jp.co.makip.unisizesdk.UnisizeBannerListener {
+                override fun didFinish() {
+                    Log.d("MainActivity", "textWebView didFinish()")
+                    setupExWebView() // ExWebViewをセットアップして表示
+                }
 
-            override fun didFail(unisizeError: jp.co.makip.unisizesdk.UnisizeError) {
-                val message = unisizeError.errMessage()
-                Log.d("MainActivity", "textWebView didFail($message)")
-                requireActivity().runOnUiThread {
-                    textWebView.layoutParams.height = 0 // 高さを0に設定
-                    textWebView.requestLayout()
+                override fun didFail(unisizeError: jp.co.makip.unisizesdk.UnisizeError) {
+                    val message = unisizeError.errMessage()
+                    Log.d("MainActivity", "textWebView didFail($message)")
+                    requireActivity().runOnUiThread {
+                        textWebView.layoutParams.height = 0 // 高さを0に設定
+                        textWebView.requestLayout()
+                    }
+                }
+
+                override fun didResized(
+                    width: Int,
+                    height: Int,
+                ) {
+                    Log.d("MainActivity", "textWebView didResized(width：$width、height：$height)")
+                    requireActivity().runOnUiThread {
+                        textWebView.layoutParams.height = height
+                        textWebView.requestLayout()
+                    }
+                }
+
+                override fun bannerClicked() {
+                    Log.d("MainActivity", "textWebView bannerClicked()")
+                }
+
+                override fun didUnsupported(message: String) {
+                    Log.d("MainActivity", "textWebView didUnsupported($message)")
+                    requireActivity().runOnUiThread {
+                        textWebView.layoutParams.height = 0 // 高さを0に設定
+                        textWebView.requestLayout()
+                    }
+                }
+
+                override fun didBeidChanged(
+                    beid: String,
+                    recommendedItems: String,
+                    type: String,
+                ) {
+                    Log.d("MainActivity", "textWebView didBeidChanged(beid: $beid, recommendedItems: $recommendedItems)")
                 }
             }
-
-            override fun didResized(width: Int, height: Int) {
-                Log.d("MainActivity", "textWebView didResized(width：$width、height：$height)")
-                requireActivity().runOnUiThread {
-                    textWebView.layoutParams.height = height
-                    textWebView.requestLayout()
-                }
-            }
-
-            override fun bannerClicked() {
-                Log.d("MainActivity", "textWebView bannerClicked()")
-            }
-
-            override fun didUnsupported(message: String) {
-                Log.d("MainActivity", "textWebView didUnsupported($message)")
-                requireActivity().runOnUiThread {
-                    textWebView.layoutParams.height = 0 // 高さを0に設定
-                    textWebView.requestLayout()
-                }
-            }
-
-            override fun didBeidChanged(beid: String, recommendedItems: String, type: String) {
-                Log.d("MainActivity", "textWebView didBeidChanged(beid: $beid, recommendedItems: $recommendedItems)")
-            }
-        }
 
         // UnisizeBannerのパラメータを設定
         textWebView.setupParam(
@@ -100,7 +112,7 @@ class UnisizeFragment : Fragment(R.layout.fragment_unisize) {
             enableWebViewLog = true,
             enablePrintLog = true,
             sendErrorLog = true,
-            customStyle = customStyle
+            customStyle = customStyle,
         )
 
         textWebView.addInterfaceToJavaScript(requireContext())
@@ -109,44 +121,52 @@ class UnisizeFragment : Fragment(R.layout.fragment_unisize) {
 
     // ExWebViewをセットアップして表示するメソッド
     private fun setupExWebView() {
-        exWebView?.listener = object : jp.co.makip.unisizesdk.UnisizeBannerListener {
-            override fun didFinish() {
-                Log.d("MainActivity", "exWebView didFinish()")
-            }
+        exWebView?.listener =
+            object : jp.co.makip.unisizesdk.UnisizeBannerListener {
+                override fun didFinish() {
+                    Log.d("MainActivity", "exWebView didFinish()")
+                }
 
-            override fun didFail(unisizeError: jp.co.makip.unisizesdk.UnisizeError) {
-                val message = unisizeError.errMessage()
-                Log.d("MainActivity", "exWebView didFail($message)")
-                requireActivity().runOnUiThread {
-                    exWebView?.layoutParams?.height = 0 // 高さを0に設定
-                    exWebView?.requestLayout()
+                override fun didFail(unisizeError: jp.co.makip.unisizesdk.UnisizeError) {
+                    val message = unisizeError.errMessage()
+                    Log.d("MainActivity", "exWebView didFail($message)")
+                    requireActivity().runOnUiThread {
+                        exWebView?.layoutParams?.height = 0 // 高さを0に設定
+                        exWebView?.requestLayout()
+                    }
+                }
+
+                override fun didResized(
+                    width: Int,
+                    height: Int,
+                ) {
+                    Log.d("MainActivity", "exWebView didResized(width：$width、height：$height)")
+                    requireActivity().runOnUiThread {
+                        exWebView?.layoutParams?.height = height
+                        exWebView?.requestLayout()
+                    }
+                }
+
+                override fun bannerClicked() {
+                    Log.d("MainActivity", "exWebView bannerClicked()")
+                }
+
+                override fun didUnsupported(message: String) {
+                    Log.d("MainActivity", "exWebView didUnsupported($message)")
+                    requireActivity().runOnUiThread {
+                        exWebView?.layoutParams?.height = 0 // 高さを0に設定
+                        exWebView?.requestLayout()
+                    }
+                }
+
+                override fun didBeidChanged(
+                    beid: String,
+                    recommendedItems: String,
+                    type: String,
+                ) {
+                    Log.d("MainActivity", "exWebView didBeidChanged(beid: $beid, recommendedItems: $recommendedItems)")
                 }
             }
-
-            override fun didResized(width: Int, height: Int) {
-                Log.d("MainActivity", "exWebView didResized(width：$width、height：$height)")
-                requireActivity().runOnUiThread {
-                    exWebView?.layoutParams?.height = height
-                    exWebView?.requestLayout()
-                }
-            }
-
-            override fun bannerClicked() {
-                Log.d("MainActivity", "exWebView bannerClicked()")
-            }
-
-            override fun didUnsupported(message: String) {
-                Log.d("MainActivity", "exWebView didUnsupported($message)")
-                requireActivity().runOnUiThread {
-                    exWebView?.layoutParams?.height = 0 // 高さを0に設定
-                    exWebView?.requestLayout()
-                }
-            }
-
-            override fun didBeidChanged(beid: String, recommendedItems: String, type: String) {
-                Log.d("MainActivity", "exWebView didBeidChanged(beid: $beid, recommendedItems: $recommendedItems)")
-            }
-        }
 
         // UnisizeBannerのパラメータを設定
         exWebView?.setupParam(
@@ -159,7 +179,7 @@ class UnisizeFragment : Fragment(R.layout.fragment_unisize) {
             enableWebViewLog = true,
             enablePrintLog = true,
             sendErrorLog = true,
-            customStyle = customStyle
+            customStyle = customStyle,
         )
 
         exWebView?.addInterfaceToJavaScript(requireContext())
@@ -168,44 +188,52 @@ class UnisizeFragment : Fragment(R.layout.fragment_unisize) {
 
     // CiWebViewをセットアップして表示するメソッド
     private fun setupCiWebView() {
-        ciWebView?.listener = object : jp.co.makip.unisizesdk.UnisizeBannerListener {
-            override fun didFinish() {
-                Log.d("MainActivity", "ciWebView didFinish")
-            }
+        ciWebView?.listener =
+            object : jp.co.makip.unisizesdk.UnisizeBannerListener {
+                override fun didFinish() {
+                    Log.d("MainActivity", "ciWebView didFinish")
+                }
 
-            override fun didFail(unisizeError: jp.co.makip.unisizesdk.UnisizeError) {
-                val message = unisizeError.errMessage()
-                Log.d("MainActivity", "ciWebView didFail：$message")
-                requireActivity().runOnUiThread {
-                    ciWebView?.layoutParams?.height = 0 // 高さを0に設定
-                    ciWebView?.requestLayout()
+                override fun didFail(unisizeError: jp.co.makip.unisizesdk.UnisizeError) {
+                    val message = unisizeError.errMessage()
+                    Log.d("MainActivity", "ciWebView didFail：$message")
+                    requireActivity().runOnUiThread {
+                        ciWebView?.layoutParams?.height = 0 // 高さを0に設定
+                        ciWebView?.requestLayout()
+                    }
+                }
+
+                override fun didResized(
+                    width: Int,
+                    height: Int,
+                ) {
+                    Log.d("MainActivity", "ciWebView didResized：width：$width、height：$height")
+                    requireActivity().runOnUiThread {
+                        ciWebView?.layoutParams?.height = height
+                        ciWebView?.requestLayout()
+                    }
+                }
+
+                override fun bannerClicked() {
+                    Log.d("MainActivity", "ciWebView bannerClicked")
+                }
+
+                override fun didUnsupported(message: String) {
+                    Log.d("MainActivity", "ciWebView didUnsupported：$message")
+                    requireActivity().runOnUiThread {
+                        ciWebView?.layoutParams?.height = 0 // 高さを0に設定
+                        ciWebView?.requestLayout()
+                    }
+                }
+
+                override fun didBeidChanged(
+                    beid: String,
+                    recommendedItems: String,
+                    type: String,
+                ) {
+                    Log.d("MainActivity", "ciWebView didBeidChanged(beid: $beid, recommendedItems: $recommendedItems)")
                 }
             }
-
-            override fun didResized(width: Int, height: Int) {
-                Log.d("MainActivity", "ciWebView didResized：width：$width、height：$height")
-                requireActivity().runOnUiThread {
-                    ciWebView?.layoutParams?.height = height
-                    ciWebView?.requestLayout()
-                }
-            }
-
-            override fun bannerClicked() {
-                Log.d("MainActivity", "ciWebView bannerClicked")
-            }
-
-            override fun didUnsupported(message: String) {
-                Log.d("MainActivity", "ciWebView didUnsupported：$message")
-                requireActivity().runOnUiThread {
-                    ciWebView?.layoutParams?.height = 0 // 高さを0に設定
-                    ciWebView?.requestLayout()
-                }
-            }
-
-            override fun didBeidChanged(beid: String, recommendedItems: String, type: String) {
-                Log.d("MainActivity", "ciWebView didBeidChanged(beid: $beid, recommendedItems: $recommendedItems)")
-            }
-        }
 
         // UnisizeBannerのパラメータを設定
         ciWebView?.setupParam(
@@ -218,7 +246,7 @@ class UnisizeFragment : Fragment(R.layout.fragment_unisize) {
             enableWebViewLog = true,
             enablePrintLog = true,
             sendErrorLog = true,
-            customStyle = customStyle
+            customStyle = customStyle,
         )
 
         ciWebView?.addInterfaceToJavaScript(requireContext())
@@ -261,19 +289,21 @@ class UnisizeFragment : Fragment(R.layout.fragment_unisize) {
             lang = lang_edit.getText().toString()
 
             if (itm == "" || cid == "") {
-                Toast.makeText(requireContext(), "itm、またはcidが未設定です", Toast.LENGTH_SHORT)
+                Toast
+                    .makeText(requireContext(), "itm、またはcidが未設定です", Toast.LENGTH_SHORT)
                     .show()
                 return@setOnClickListener
             }
 
-            val bnrModeStr = sdkBnrMode.stream()
-                .map { obj: BannerType -> obj.name }
-                .collect(Collectors.joining(","))
+            val bnrModeStr =
+                sdkBnrMode
+                    .stream()
+                    .map { obj: BannerType -> obj.name }
+                    .collect(Collectors.joining(","))
 
             Log.d("test", bnrModeStr)
 
             // アイテムIDなどのパラメーターの受け渡し
-
 
             // アイテムIDなどのパラメーターの受け渡し
             if (bnrModeStr == "TEXT" || bnrModeStr == "TEXT,EX") {
@@ -287,7 +317,7 @@ class UnisizeFragment : Fragment(R.layout.fragment_unisize) {
                     true,
                     true,
                     true,
-                    customStyle
+                    customStyle,
                 )
                 // Javascriptからネイティブ関数を呼び出すためのインターフェース
                 textWebView.addInterfaceToJavaScript(requireContext())
@@ -306,7 +336,7 @@ class UnisizeFragment : Fragment(R.layout.fragment_unisize) {
                     true,
                     true,
                     true,
-                    customStyle
+                    customStyle,
                 )
                 // Javascriptからネイティブ関数を呼び出すためのインターフェース
                 exWebView!!.addInterfaceToJavaScript(requireContext())
@@ -328,7 +358,7 @@ class UnisizeFragment : Fragment(R.layout.fragment_unisize) {
                     true,
                     true,
                     true,
-                    customStyle
+                    customStyle,
                 )
                 // Javascriptからネイティブ関数を呼び出すためのインターフェース
                 ciWebView!!.addInterfaceToJavaScript(requireContext())
@@ -336,6 +366,5 @@ class UnisizeFragment : Fragment(R.layout.fragment_unisize) {
                 ciWebView!!.show()
             }
         }
-
     }
 }

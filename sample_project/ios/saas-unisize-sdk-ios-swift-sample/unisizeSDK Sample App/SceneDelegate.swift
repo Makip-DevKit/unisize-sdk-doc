@@ -1,8 +1,3 @@
-//
-//  SceneDelegate.swift
-//  unisizeSDK Sample App
-//
-
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
