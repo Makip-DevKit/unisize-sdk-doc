@@ -1,0 +1,15 @@
+{
+  "originHash" : "a05f6c4e7c988dfbc6786633ccd1caa9fafd5005ceed91ca5e8d4a3a64bb8f9f",
+  "pins" : [
+    {
+      "identity" : "unisize-sdk-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Makip-DevKit/unisize-sdk-ios",
+      "state" : {
+        "revision" : "9d8fe1d4845c4cefaccecbb1daae1339d6f7e6da",
+        "version" : "2.0.0"
+      }
+    }
+  ],
+  "version" : 3
+}
