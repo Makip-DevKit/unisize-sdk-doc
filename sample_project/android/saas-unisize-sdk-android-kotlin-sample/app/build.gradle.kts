@@ -47,7 +47,7 @@ dependencies {
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
 
-    implementation("jp.co.makip:unisize-sdk:1.5.5")
+    implementation("jp.co.makip:unisize-sdk:2.0")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
