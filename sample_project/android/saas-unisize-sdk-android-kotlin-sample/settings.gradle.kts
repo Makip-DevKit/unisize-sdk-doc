@@ -15,13 +15,8 @@ pluginManagement {
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
-        maven {
-            url = uri("https://maven.pkg.github.com/Makip-DevKit/unisize-sdk-android")
-            credentials {
-                username = System.getenv("GITHUB_USERNAME")
-                password = System.getenv("GITHUB_TOKEN")
-            }
-        }
+        mavenCentral()
+        maven { url = uri("https://jitpack.io") }
 
         google()
         mavenCentral()
