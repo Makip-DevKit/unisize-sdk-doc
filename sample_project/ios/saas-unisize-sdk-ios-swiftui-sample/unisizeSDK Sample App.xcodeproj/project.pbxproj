@@ -11,8 +11,8 @@
 		5D2DBE962C32685D00B194F4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D2DBE952C32685D00B194F4 /* ContentView.swift */; };
 		5D2DBE982C32685D00B194F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5D2DBE972C32685D00B194F4 /* Assets.xcassets */; };
 		5D2DBE9B2C32685D00B194F4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5D2DBE9A2C32685D00B194F4 /* Preview Assets.xcassets */; };
+		5D98B6CF2F4DC1CB007663B5 /* unisizeSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 5D98B6CE2F4DC1CB007663B5 /* unisizeSDK */; };
 		5DC4F9FA2C32854C00D4DB31 /* CVTagTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC4F9F92C32854C00D4DB31 /* CVTagTestView.swift */; };
-		5DC7DE672EE918A8002C6D94 /* unisizeSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 5DC7DE662EE918A8002C6D94 /* unisizeSDK */; };
 		5DCAB9102D8D481B00104D42 /* UnisizeBannerWebviewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCAB90F2D8D481B00104D42 /* UnisizeBannerWebviewRepresentable.swift */; };
 /* End PBXBuildFile section */
 
@@ -44,7 +44,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5DC7DE672EE918A8002C6D94 /* unisizeSDK in Frameworks */,
+				5D98B6CF2F4DC1CB007663B5 /* unisizeSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,7 +114,7 @@
 			);
 			name = "unisizeSDK Sample App";
 			packageProductDependencies = (
-				5DC7DE662EE918A8002C6D94 /* unisizeSDK */,
+				5D98B6CE2F4DC1CB007663B5 /* unisizeSDK */,
 			);
 			productName = "unisizeSDK Sample App";
 			productReference = 5D2DBE902C32685D00B194F4 /* unisizeSDK Sample App.app */;
@@ -145,7 +145,7 @@
 			);
 			mainGroup = 5D2DBE872C32685C00B194F4;
 			packageReferences = (
-				5DC7DE652EE918A8002C6D94 /* XCRemoteSwiftPackageReference "unisize-sdk-ios" */,
+				5D98B6CD2F4DC1CB007663B5 /* XCRemoteSwiftPackageReference "unisize-sdk-ios" */,
 			);
 			productRefGroup = 5D2DBE912C32685D00B194F4 /* Products */;
 			projectDirPath = "";
@@ -308,7 +308,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"unisizeSDK Sample App/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
@@ -321,12 +321,12 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16;
+				IPHONEOS_DEPLOYMENT_TARGET = 15;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.5;
+				MARKETING_VERSION = 2.0.6;
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.co.makip.unisizeSDKSampleApp.unisizeSDK-Sample-App-SwiftUI";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -346,7 +346,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"unisizeSDK Sample App/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
@@ -359,12 +359,12 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16;
+				IPHONEOS_DEPLOYMENT_TARGET = 15;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.5;
+				MARKETING_VERSION = 2.0.6;
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.co.makip.unisizeSDKSampleApp.unisizeSDK-Sample-App-SwiftUI";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -402,20 +402,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		5DC7DE652EE918A8002C6D94 /* XCRemoteSwiftPackageReference "unisize-sdk-ios" */ = {
+		5D98B6CD2F4DC1CB007663B5 /* XCRemoteSwiftPackageReference "unisize-sdk-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Makip-DevKit/unisize-sdk-ios";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.5;
+				minimumVersion = 2.0.6;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		5DC7DE662EE918A8002C6D94 /* unisizeSDK */ = {
+		5D98B6CE2F4DC1CB007663B5 /* unisizeSDK */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 5DC7DE652EE918A8002C6D94 /* XCRemoteSwiftPackageReference "unisize-sdk-ios" */;
+			package = 5D98B6CD2F4DC1CB007663B5 /* XCRemoteSwiftPackageReference "unisize-sdk-ios" */;
 			productName = unisizeSDK;
 		};
 /* End XCSwiftPackageProductDependency section */

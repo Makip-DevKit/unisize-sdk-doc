@@ -69,6 +69,9 @@ struct UnisizeBannerWebviewRepresentable: UIViewRepresentable {
     // MARK: - UIView生成（初回のみ呼ばれる）
     func makeUIView(context: Context) -> UnisizeBannerWebview {
         let banner = UnisizeBannerWebview()
+        if #available(iOS 15.0, *) {
+            banner.translatesAutoresizingMaskIntoConstraints = false
+        }
         context.coordinator.bannerView = banner
 
         // バナーを表示する親 UIViewController を取得
@@ -110,6 +113,15 @@ struct UnisizeBannerWebviewRepresentable: UIViewRepresentable {
 
     // MARK: - View更新（バインディングやコントローラが変更された時に呼ばれる）
     func updateUIView(_ uiView: UnisizeBannerWebview, context: Context) {
+        if #available(iOS 15.0, *) {
+            if let superview = uiView.superview {
+                NSLayoutConstraint.activate([
+                    uiView.leadingAnchor .constraint(equalTo: superview.leadingAnchor),
+                    uiView.trailingAnchor.constraint(equalTo: superview.trailingAnchor)
+                ])
+            }
+        }
+        
         // Viewが更新されても reload/close の参照を最新に保つ
         funcController?.reloadAction = {
             uiView.reload()
