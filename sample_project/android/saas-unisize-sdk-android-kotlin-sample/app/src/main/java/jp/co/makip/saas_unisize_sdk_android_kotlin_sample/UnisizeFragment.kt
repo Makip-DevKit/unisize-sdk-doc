@@ -13,7 +13,7 @@ import java.util.stream.Collectors
 
 class UnisizeFragment : Fragment(R.layout.fragment_unisize) {
     // UnisizeBannerのインスタンスを保持
-    private lateinit var textWebView: jp.co.makip.unisizesdk.UnisizeBanner
+    private var textWebView: jp.co.makip.unisizesdk.UnisizeBanner? = null
     private var exWebView: jp.co.makip.unisizesdk.UnisizeBanner? = null
     private var ciWebView: jp.co.makip.unisizesdk.UnisizeBanner? = null
 
@@ -51,9 +51,22 @@ class UnisizeFragment : Fragment(R.layout.fragment_unisize) {
         setupButtons(view) // ボタンのセットアップ
     }
 
+    override fun onDestroyView() {
+        textWebView?.onDestroy()
+        textWebView?.destroy()
+        textWebView = null
+        exWebView?.onDestroy()
+        exWebView?.destroy()
+        exWebView = null
+        ciWebView?.onDestroy()
+        ciWebView?.destroy()
+        ciWebView = null
+        super.onDestroyView()
+    }
+
     // TextWebViewをセットアップするメソッド
     private fun setupTextWebView() {
-        textWebView.listener =
+        textWebView?.listener =
             object : jp.co.makip.unisizesdk.UnisizeBannerListener {
                 override fun didFinish() {
                     Log.d("MainActivity", "textWebView didFinish()")
@@ -64,8 +77,8 @@ class UnisizeFragment : Fragment(R.layout.fragment_unisize) {
                     val message = unisizeError.errMessage()
                     Log.d("MainActivity", "textWebView didFail($message)")
                     requireActivity().runOnUiThread {
-                        textWebView.layoutParams.height = 0 // 高さを0に設定
-                        textWebView.requestLayout()
+                        textWebView?.layoutParams?.height = 0 // 高さを0に設定
+                        textWebView?.requestLayout()
                     }
                 }
 
@@ -75,8 +88,8 @@ class UnisizeFragment : Fragment(R.layout.fragment_unisize) {
                 ) {
                     Log.d("MainActivity", "textWebView didResized(width：$width、height：$height)")
                     requireActivity().runOnUiThread {
-                        textWebView.layoutParams.height = height
-                        textWebView.requestLayout()
+                        textWebView?.layoutParams?.height = height
+                        textWebView?.requestLayout()
                     }
                 }
 
@@ -87,8 +100,8 @@ class UnisizeFragment : Fragment(R.layout.fragment_unisize) {
                 override fun didUnsupported(message: String) {
                     Log.d("MainActivity", "textWebView didUnsupported($message)")
                     requireActivity().runOnUiThread {
-                        textWebView.layoutParams.height = 0 // 高さを0に設定
-                        textWebView.requestLayout()
+                        textWebView?.layoutParams?.height = 0 // 高さを0に設定
+                        textWebView?.requestLayout()
                     }
                 }
 
@@ -102,7 +115,7 @@ class UnisizeFragment : Fragment(R.layout.fragment_unisize) {
             }
 
         // UnisizeBannerのパラメータを設定
-        textWebView.setupParam(
+        textWebView?.setupParam(
             bannerType = jp.co.makip.unisizesdk.UnisizeBanner.BannerType.TEXT,
             bannerMode = sdkBnrMode,
             itm = itm,
@@ -115,8 +128,8 @@ class UnisizeFragment : Fragment(R.layout.fragment_unisize) {
             customStyle = customStyle,
         )
 
-        textWebView.addInterfaceToJavaScript(requireContext())
-        textWebView.show() // バナーを表示
+        textWebView?.addInterfaceToJavaScript(requireContext())
+        textWebView?.show() // バナーを表示
     }
 
     // ExWebViewをセットアップして表示するメソッド
@@ -263,17 +276,17 @@ class UnisizeFragment : Fragment(R.layout.fragment_unisize) {
         view.findViewById<Button>(R.id.reloadButton).setOnClickListener {
             if (textWebView != null) {
                 Log.d("reload", "TEXT")
-                textWebView.reload() // TextWebViewをリロード
+                textWebView?.reload() // TextWebViewをリロード
             }
 
             if (exWebView != null) {
                 Log.d("reload", "EX")
-                exWebView!!.reload() // ExWebViewをリロード
+                exWebView?.reload() // ExWebViewをリロード
             }
 
             if (ciWebView != null) {
                 Log.d("reload", "CI")
-                ciWebView!!.reload() // ExWebViewをリロード
+                ciWebView?.reload() // CIWebViewをリロード
             }
         }
 
@@ -307,7 +320,7 @@ class UnisizeFragment : Fragment(R.layout.fragment_unisize) {
 
             // アイテムIDなどのパラメーターの受け渡し
             if (bnrModeStr == "TEXT" || bnrModeStr == "TEXT,EX") {
-                textWebView.setupParam(
+                textWebView?.setupParam(
                     BannerType.TEXT,
                     sdkBnrMode,
                     itm,
@@ -320,13 +333,13 @@ class UnisizeFragment : Fragment(R.layout.fragment_unisize) {
                     customStyle,
                 )
                 // Javascriptからネイティブ関数を呼び出すためのインターフェース
-                textWebView.addInterfaceToJavaScript(requireContext())
+                textWebView?.addInterfaceToJavaScript(requireContext())
                 // TEXTバナーを表示
-                textWebView.show()
+                textWebView?.show()
             }
 
             if (bnrModeStr == "EX" || bnrModeStr == "TEXT,EX") {
-                exWebView!!.setupParam(
+                exWebView?.setupParam(
                     BannerType.EX,
                     sdkBnrMode,
                     itm,
@@ -339,32 +352,30 @@ class UnisizeFragment : Fragment(R.layout.fragment_unisize) {
                     customStyle,
                 )
                 // Javascriptからネイティブ関数を呼び出すためのインターフェース
-                exWebView!!.addInterfaceToJavaScript(requireContext())
+                exWebView?.addInterfaceToJavaScript(requireContext())
                 // EXバナーを表示
-                exWebView!!.show()
+                exWebView?.show()
             }
 
             // アイテムIDなどのパラメーターの受け渡し
 
             // アイテムIDなどのパラメーターの受け渡し
-            if (ciWebView != null) {
-                ciWebView!!.setupParam(
-                    BannerType.CI,
-                    sdkBnrMode,
-                    itm,
-                    cid,
-                    cuid,
-                    lang,
-                    true,
-                    true,
-                    true,
-                    customStyle,
-                )
-                // Javascriptからネイティブ関数を呼び出すためのインターフェース
-                ciWebView!!.addInterfaceToJavaScript(requireContext())
-                // CIバナーを表示
-                ciWebView!!.show()
-            }
+            ciWebView?.setupParam(
+                BannerType.CI,
+                sdkBnrMode,
+                itm,
+                cid,
+                cuid,
+                lang,
+                true,
+                true,
+                true,
+                customStyle,
+            )
+            // Javascriptからネイティブ関数を呼び出すためのインターフェース
+            ciWebView?.addInterfaceToJavaScript(requireContext())
+            // CIバナーを表示
+            ciWebView?.show()
         }
     }
 }

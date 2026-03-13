@@ -249,6 +249,26 @@ public class UnisizeFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onDestroyView() {
+        if (textWebView != null) {
+            textWebView.onDestroy();
+            textWebView.destroy();
+            textWebView = null;
+        }
+        if (exWebView != null) {
+            exWebView.onDestroy();
+            exWebView.destroy();
+            exWebView = null;
+        }
+        if (ciWebView != null) {
+            ciWebView.onDestroy();
+            ciWebView.destroy();
+            ciWebView = null;
+        }
+        super.onDestroyView();
+    }
+
     private void setupButtons(View view) {
         EditText itmEdit = view.findViewById(R.id.itm);
         EditText cidEdit = view.findViewById(R.id.cid);

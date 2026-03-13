@@ -12,6 +12,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CVTagTestActivity extends AppCompatActivity {
+    private jp.co.makip.unisizesdk.UnisizeCVTag cvTagWebView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +31,7 @@ public class CVTagTestActivity extends AppCompatActivity {
         String iteminfo = "";
         String regType = "";
 
-        jp.co.makip.unisizesdk.UnisizeCVTag cvTagWebView = findViewById(R.id.cvTagWebView);
+        cvTagWebView = findViewById(R.id.cvTagWebView);
         cvTagWebView.setListener(new jp.co.makip.unisizesdk.UnisizeCVTagListener() {
             // 読み込み完了時に実行したい処理を実装
             @Override
@@ -83,4 +85,12 @@ public class CVTagTestActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onDestroy() {
+        if (cvTagWebView != null) {
+            cvTagWebView.destroy();
+            cvTagWebView = null;
+        }
+        super.onDestroy();
+    }
 }

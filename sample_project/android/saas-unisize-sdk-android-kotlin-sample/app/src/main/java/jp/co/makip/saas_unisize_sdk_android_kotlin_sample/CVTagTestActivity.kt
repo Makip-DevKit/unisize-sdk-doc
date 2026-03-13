@@ -9,6 +9,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class CVTagTestActivity : AppCompatActivity() {
+    private var cvTagWebView: jp.co.makip.unisizesdk.UnisizeCVTag? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -16,7 +18,7 @@ class CVTagTestActivity : AppCompatActivity() {
 
         // UnisizeCVTag（WKWebView）の初期化と設定
         // Javascriptに渡す値（※検証用のサンプルデータ）
-        val cid: String = ""  // クライアントID
+        val cid: String = "" // クライアントID
         val cuid: String = "" // ECサイトの会員ID
         val purchaseid: String = "" // 購入時に発行された注文ID
         val itemnum: List<String> = listOf("") // 購入数（アイテム毎）
@@ -26,22 +28,23 @@ class CVTagTestActivity : AppCompatActivity() {
         val iteminfo: String = ""
         val regType: String = ""
 
-        var cvTagWebView: jp.co.makip.unisizesdk.UnisizeCVTag = findViewById(R.id.cvTagWebView)
-        cvTagWebView.listener = object : jp.co.makip.unisizesdk.UnisizeCVTagListener {
-            // 読み込み完了時に実行したい処理を実装
-            override fun didFinish() {
-                Log.d("UnisizeCVTag", "didFinish()")
+        cvTagWebView = findViewById(R.id.cvTagWebView)
+        cvTagWebView?.listener =
+            object : jp.co.makip.unisizesdk.UnisizeCVTagListener {
+                // 読み込み完了時に実行したい処理を実装
+                override fun didFinish() {
+                    Log.d("UnisizeCVTag", "didFinish()")
+                }
+
+                // エラーが発生した場合に実行したい処理を記述
+                override fun didFail(unisizeError: jp.co.makip.unisizesdk.UnisizeError) {
+                    // エラーが発生した場合の処理
+                    val message = unisizeError.errMessage()
+                    Log.d("UnisizeCVTag", "didFail($message)")
+                }
             }
 
-            // エラーが発生した場合に実行したい処理を記述
-            override fun didFail(unisizeError: jp.co.makip.unisizesdk.UnisizeError) {
-                // エラーが発生した場合の処理
-                val message = unisizeError.errMessage()
-                Log.d("UnisizeCVTag", "didFail(${message})")
-            }
-        }
-
-        cvTagWebView.setupParam(
+        cvTagWebView?.setupParam(
             cid,
             cuid,
             purchaseid,
@@ -53,15 +56,15 @@ class CVTagTestActivity : AppCompatActivity() {
             "",
             "",
             true,
-            true
+            true,
         )
 
-        cvTagWebView.show()
+        cvTagWebView?.show()
 
         // WebViewリロードボタン（通信検証用）
         val reloadButton: Button = findViewById(R.id.reloadButton)
         reloadButton.setOnClickListener {
-            cvTagWebView.reload()
+            cvTagWebView?.reload()
         }
 
         val closeButton: Button = findViewById(R.id.closeButton)
@@ -74,6 +77,11 @@ class CVTagTestActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+    }
 
+    override fun onDestroy() {
+        cvTagWebView?.destroy()
+        cvTagWebView = null
+        super.onDestroy()
     }
 }
