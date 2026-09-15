@@ -47,7 +47,7 @@ dependencies {
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
 
-	implementation("com.github.Makip-DevKit:unisize-sdk-android:2.0.5")
+    implementation("com.github.Makip-DevKit:unisize-sdk-android:3.0.1")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

@@ -8,5 +8,9 @@
     <string name="banner_text">text</string>
     <string name="banner_ex">ex</string>
     <string name="banner_ci">ci</string>
+    <string name="top_title">TOP</string>
+    <string name="open_unisize">Unisizeを開く</string>
+    <string name="open_aunn">aunn コーディネート 単独</string>
+    <string name="open_aunn_with_unisize">aunn コーディネート + unisize 同居</string>
 
 </resources>

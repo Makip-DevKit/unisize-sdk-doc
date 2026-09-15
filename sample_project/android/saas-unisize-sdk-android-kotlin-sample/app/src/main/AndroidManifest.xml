@@ -7,7 +7,7 @@
     <uses-feature android:name="android.hardware.camera" android:required="false" />
 
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -34,6 +34,31 @@
         <activity
             android:name=".CVTagTestActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:exported="false" />
+
+        <!-- 検証用画面はコードで UI を構築しており回転で取得済みの状態が消えるため、縦固定にしています -->
+        <activity
+            android:name=".AunnCoordinateTestActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:screenOrientation="portrait"
+            android:exported="false" />
+
+        <activity
+            android:name=".AunnCoordinateWithUnisizeTestActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:screenOrientation="portrait"
+            android:exported="false" />
+
+        <activity
+            android:name=".AunnCoordinateDetailActivity"
+            android:label="aunn Coordinate Detail"
+            android:screenOrientation="unspecified"
+            android:exported="false" />
+
+        <activity
+            android:name=".AunnStaffDetailActivity"
+            android:label="aunn Staff Detail"
+            android:screenOrientation="unspecified"
             android:exported="false" />
 
         <activity android:name="jp.co.makip.unisizesdk.UnisizeBanner$WebAppInterface$UnisizeDynamicFragmentActivity"
