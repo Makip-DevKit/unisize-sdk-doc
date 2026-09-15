@@ -6,8 +6,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Makip-DevKit/unisize-sdk-ios",
       "state" : {
-        "revision" : "d3926bb28238a043367ae61416d4eff77b92b442",
-        "version" : "2.0.6"
+        "revision" : "c25c55410e098c758f8326b7fcf5ba6a7325eca8",
+        "version" : "3.0.1"
       }
     }
   ],

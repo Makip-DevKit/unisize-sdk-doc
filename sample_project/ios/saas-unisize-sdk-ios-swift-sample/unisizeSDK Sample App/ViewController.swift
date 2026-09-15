@@ -2,7 +2,23 @@ import UIKit
 import WebKit
 import unisizeSDK
 
-// MARK: - ViewController（Main.storyboardの ViewController）
+// MARK: - ViewController（unisize バナーの実装サンプル）
+/*
+ * UnisizeBannerWebview を使って unisize バナーを表示する検証用画面です（Main.storyboard 上に配置）。
+ *
+ * 実装の流れは次の 3 ステップです。
+ *  1. Storyboard に置いた UnisizeBannerWebview に高さ制約（初期値 0）を設定する
+ *  2. setupParam() で cid / itm などのパラメータと delegate を設定する
+ *  3. show() で読み込みを開始し、delegate の didResized で高さ制約を実際のバナー高さへ更新する
+ *
+ * バナーは 3 種類あり、この画面ではそれぞれを個別の UnisizeBannerWebview として配置しています。
+ *  - text：サイズ表記の近くに置くテキスト型バナー
+ *  - ex  ：詳細情報を表示する拡張バナー（TEXT バナーの表示完了後に show() します）
+ *  - ci  ：カート導線などに置くバナー（bannerMode には含めません）
+ *
+ * cid / itm / cuid / lang は画面上のフォームからも変更できます。
+ * 画面下部のボタンから CV タグの検証画面（CvTagTestViewController）へ遷移します。
+ */
 class ViewController: UIViewController {
     
     // MARK: - IBOutlet変数（Storyboardと接続）
@@ -17,6 +33,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var langTextField: UITextField!
     
     // MARK: - unisizeバナー用パラメータ
+    // ※ cid / itm は必須です。ここに値を設定するか、画面上のフォームから入力して下さい。
     var cid: String = "" // クライアントID
     var itm: String = "" // 商品識別ID
     var cuid: String = "" // ECサイトのユーザー識別ID
@@ -27,6 +44,7 @@ class ViewController: UIViewController {
     var customStyle: String = "" // カスタムCSS（非推奨）
     
     // MARK: - 高さ制約（各バナー用）
+    // バナーの高さは表示内容によって変わるため、delegate の didResized で更新します。
     var textBannerWebviewHeightConstraint: NSLayoutConstraint!
     var exBannerWebviewHeightConstraint: NSLayoutConstraint!
     var ciBannerWebviewHeightConstraint: NSLayoutConstraint!
@@ -69,8 +87,14 @@ class ViewController: UIViewController {
     // ViewControllerを閉じるときの処理
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        print("ViewController > viewWillDisappear")
-        
+        print("ViewController > viewDidDisappear")
+
+        // 他の画面を重ねただけのときに破棄しないよう、実際に画面を離れるとき（pop / dismiss）だけ解放します。
+        // CV タグ画面はシート表示のためここへは来ませんが、全画面表示に変更しても壊れないようにするためです。
+        guard isMovingFromParent || isBeingDismissed else {
+            return
+        }
+
         // 各バナーのリソース解放
         textBannerWebview?.close()
         exBannerWebview?.close()
@@ -94,7 +118,8 @@ class ViewController: UIViewController {
             (ciBannerWebview, "ci")
         ]
         
-        // CIバナーは bannerMode から除外
+        // bannerMode は「この画面で表示するバナーの種類」をSDKへ伝えるパラメータです。
+        // CIバナーは対象外のため bannerMode から除外します。
         let availableBannerTypes = bannerTypes.compactMap { banner, type in
             (banner != nil && type != "ci") ? type : nil
         }
@@ -169,7 +194,7 @@ class ViewController: UIViewController {
 // MARK: - UnisizeBannerWebviewDelegate実装
 extension ViewController: UnisizeBannerWebviewDelegate {
     
-    // 表示完了時
+    /// バナーの表示完了時に呼ばれます。
     func unisizeBannerWebview(_ banner: UnisizeBannerWebview, didFinish message: String, bannerType: String) {
         print("didFinish: message: \(message)")
         
@@ -179,9 +204,11 @@ extension ViewController: UnisizeBannerWebviewDelegate {
         }
     }
     
-    // 表示失敗時
-    func unisizeBannerWebview(_ banner: UnisizeBannerWebview, didFail errorObj: UnisizeError) {
-        print("didFail: \(errorObj.getJsonString())")
+    /// バナーの表示失敗時に呼ばれます。表示できないため、全バナーの高さを 0 に畳みます。
+    /// ※ 引数は bannerType までが SDK の宣言です。UnisizeBannerWebviewDelegate は全メソッドが
+    ///   @objc optional のため、シグネチャを間違えるとコンパイルは通ったまま呼ばれなくなります。
+    func unisizeBannerWebview(_ banner: UnisizeBannerWebview, didFail errorObj: UnisizeError, bannerType: String) {
+        print("didFail: bannerType: \(bannerType) \(errorObj.getJsonString())")
         
         // 高さを0にして非表示にする
         textBannerWebviewHeightConstraint?.constant = 0
@@ -192,7 +219,8 @@ extension ViewController: UnisizeBannerWebviewDelegate {
         ciBannerWebview?.layoutIfNeeded()
     }
     
-    // バナーのリサイズ時
+    /// バナーの実寸が確定・変化したときに呼ばれます。
+    /// 受け取った height を高さ制約へ反映しないとバナーが表示されないため、必ず実装して下さい。
     func unisizeBannerWebview(_ banner: UnisizeBannerWebview, didResized message: String, width: CGFloat, height: CGFloat, bannerType: String) {
         print("didResized: width: \(width) height: \(height) bannerType: \(bannerType)")
         
@@ -209,7 +237,8 @@ extension ViewController: UnisizeBannerWebviewDelegate {
         }
     }
     
-    // unisize対象外の場合
+    /// unisize の対象外商品だった場合に呼ばれます（message == "all" は全バナーが対象外）。
+    /// 対象外のバナーは高さを 0 にして非表示にします。
     func unisizeBannerWebview(_ banner: UnisizeBannerWebview, didUnsupported message: String) {
         print("didUnsupported: \(message)")
         
@@ -225,12 +254,13 @@ extension ViewController: UnisizeBannerWebviewDelegate {
         ciBannerWebview?.layoutIfNeeded()
     }
     
-    // beid変更時
+    /// beid（unisize が発行するユーザー識別子）が変わったときに呼ばれます。
+    /// 体型登録・サイズレコメンドの結果を他機能へ連携したい場合に利用します。
     func unisizeBannerWebview(_ banner: UnisizeBannerWebview, didBeidChanged beid: String, recommendedItems: String, bannerType type: String) {
         print("didBeidChanged: beid: \(beid) recommendedItems: \(recommendedItems) type: \(type)")
     }
     
-    // バナークリック時
+    /// バナーがクリックされたときに呼ばれます。
     func unisizeBannerWebview(_ banner: UnisizeBannerWebview, didBannerClicked: String, bannerType: String) {
         print("didBannerClicked: bannerType: \(bannerType)")
     }

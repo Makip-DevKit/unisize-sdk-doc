@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Nav-Cn-t01">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -12,7 +12,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="unisizeSDK_Sample_App" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewControllerID" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="ViewController" customModule="unisizeSDK_Sample_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zg7-h0-SQ6">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="1500"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -257,6 +257,91 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pz7-eX-kGR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="897" y="-27"/>
+        </scene>
+        <!--Top View Controller-->
+        <scene sceneID="Top-Sc-n01">
+            <objects>
+                <viewController storyboardIdentifier="TopViewControllerID" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Top-Vw-c01" customClass="TopViewController" customModule="unisizeSDK_Sample_App" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Top-Vw-v01">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Btn-Un-i01">
+                                <rect key="frame" x="16" y="133" width="361" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="Cst-Un-h01"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="gray" title="unisize Banner Test"/>
+                                <connections>
+                                    <action selector="unisizeBannerTestTapped:" destination="Top-Vw-c01" eventType="touchUpInside" id="Act-Un-i01"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Btn-Au-n01">
+                                <rect key="frame" x="16" y="229" width="361" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="Cst-Au-h01"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="gray" title="aunn コーディネート単独 test"/>
+                                <connections>
+                                    <action selector="aunnCoordinateTestTapped:" destination="Top-Vw-c01" eventType="touchUpInside" id="Act-Au-n01"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Btn-Au-n02">
+                                <rect key="frame" x="16" y="325" width="361" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="Cst-Au-h02"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="gray" title="aunn コーディネート + unisize Test"/>
+                                <connections>
+                                    <action selector="aunnCoordinateWithUnisizeTestTapped:" destination="Top-Vw-c01" eventType="touchUpInside" id="Act-Au-n02"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Top-Sa-a01"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Btn-Un-i01" firstAttribute="top" secondItem="Top-Sa-a01" secondAttribute="top" constant="30" id="Cst-Un-t01"/>
+                            <constraint firstItem="Btn-Un-i01" firstAttribute="leading" secondItem="Top-Sa-a01" secondAttribute="leading" constant="16" id="Cst-Un-l01"/>
+                            <constraint firstItem="Top-Sa-a01" firstAttribute="trailing" secondItem="Btn-Un-i01" secondAttribute="trailing" constant="16" id="Cst-Un-r01"/>
+                            <constraint firstItem="Btn-Au-n01" firstAttribute="top" secondItem="Btn-Un-i01" secondAttribute="bottom" constant="36" id="Cst-Au-t01"/>
+                            <constraint firstItem="Btn-Au-n01" firstAttribute="leading" secondItem="Top-Sa-a01" secondAttribute="leading" constant="16" id="Cst-Au-l01"/>
+                            <constraint firstItem="Top-Sa-a01" firstAttribute="trailing" secondItem="Btn-Au-n01" secondAttribute="trailing" constant="16" id="Cst-Au-r01"/>
+                            <constraint firstItem="Btn-Au-n02" firstAttribute="top" secondItem="Btn-Au-n01" secondAttribute="bottom" constant="36" id="Cst-Au-t02"/>
+                            <constraint firstItem="Btn-Au-n02" firstAttribute="leading" secondItem="Top-Sa-a01" secondAttribute="leading" constant="16" id="Cst-Au-l02"/>
+                            <constraint firstItem="Top-Sa-a01" firstAttribute="trailing" secondItem="Btn-Au-n02" secondAttribute="trailing" constant="16" id="Cst-Au-r02"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Top-Nv-i01"/>
+                    <connections>
+                        <outlet property="aunnCoordinateTestButton" destination="Btn-Au-n01" id="Out-Au-n01"/>
+                        <outlet property="aunnCoordinateWithUnisizeTestButton" destination="Btn-Au-n02" id="Out-Au-n02"/>
+                        <outlet property="unisizeBannerTestButton" destination="Btn-Un-i01" id="Out-Un-i01"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Top-Fr-p01" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-380" y="-27"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Nav-Sc-n01">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Nav-Cn-t01" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Nav-Br-b01">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Top-Vw-c01" kind="relationship" relationship="rootViewController" id="Seg-Rt-r01"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Nav-Fr-p01" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-780" y="-27"/>
         </scene>
     </scenes>
     <resources>

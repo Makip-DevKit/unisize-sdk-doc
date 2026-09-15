@@ -1,27 +1,28 @@
 import UIKit
 
+// MARK: - AppDelegate（アプリ全体のライフサイクル）
+/*
+ * Xcode のテンプレートそのままの実装です。
+ * unisizeSDK はアプリ起動時の初期化（SDK 全体の初期化処理）を必要としないため、
+ * ここに unisize 用のコードを追加する必要はありません。
+ * SDK の設定は各画面（ViewController）で setupParam() 等により行います。
+ */
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    /// アプリ起動完了時に呼ばれます。
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
         return true
     }
 
     // MARK: UISceneSession Lifecycle
 
+    /// 新しい Scene を作成するときの構成を返します。
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        // Called when a new scene session is being created.
-        // Use this method to select a configuration to create the new scene with.
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
 
+    /// ユーザーが Scene を破棄したときに呼ばれます（破棄された Scene 固有のリソース解放用）。
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-        // Called when the user discards a scene session.
-        // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
-        // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
-
-
 }
-

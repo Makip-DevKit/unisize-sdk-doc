@@ -11,9 +11,9 @@
 		5D2DBE962C32685D00B194F4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D2DBE952C32685D00B194F4 /* ContentView.swift */; };
 		5D2DBE982C32685D00B194F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5D2DBE972C32685D00B194F4 /* Assets.xcassets */; };
 		5D2DBE9B2C32685D00B194F4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5D2DBE9A2C32685D00B194F4 /* Preview Assets.xcassets */; };
-		5D98B6CF2F4DC1CB007663B5 /* unisizeSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 5D98B6CE2F4DC1CB007663B5 /* unisizeSDK */; };
 		5DC4F9FA2C32854C00D4DB31 /* CVTagTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC4F9F92C32854C00D4DB31 /* CVTagTestView.swift */; };
 		5DCAB9102D8D481B00104D42 /* UnisizeBannerWebviewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCAB90F2D8D481B00104D42 /* UnisizeBannerWebviewRepresentable.swift */; };
+		5DE0873F305912CE0066AA10 /* unisizeSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 5DE0873E305912CE0066AA10 /* unisizeSDK */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -44,7 +44,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5D98B6CF2F4DC1CB007663B5 /* unisizeSDK in Frameworks */,
+				5DE0873F305912CE0066AA10 /* unisizeSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,7 +114,7 @@
 			);
 			name = "unisizeSDK Sample App";
 			packageProductDependencies = (
-				5D98B6CE2F4DC1CB007663B5 /* unisizeSDK */,
+				5DE0873E305912CE0066AA10 /* unisizeSDK */,
 			);
 			productName = "unisizeSDK Sample App";
 			productReference = 5D2DBE902C32685D00B194F4 /* unisizeSDK Sample App.app */;
@@ -145,7 +145,7 @@
 			);
 			mainGroup = 5D2DBE872C32685C00B194F4;
 			packageReferences = (
-				5D98B6CD2F4DC1CB007663B5 /* XCRemoteSwiftPackageReference "unisize-sdk-ios" */,
+				5DE0873D305912CE0066AA10 /* XCRemoteSwiftPackageReference "unisize-sdk-ios" */,
 			);
 			productRefGroup = 5D2DBE912C32685D00B194F4 /* Products */;
 			projectDirPath = "";
@@ -326,7 +326,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.6;
+				MARKETING_VERSION = 3.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.co.makip.unisizeSDKSampleApp.unisizeSDK-Sample-App-SwiftUI";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -364,7 +364,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.6;
+				MARKETING_VERSION = 3.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.co.makip.unisizeSDKSampleApp.unisizeSDK-Sample-App-SwiftUI";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -402,20 +402,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		5D98B6CD2F4DC1CB007663B5 /* XCRemoteSwiftPackageReference "unisize-sdk-ios" */ = {
+		5DE0873D305912CE0066AA10 /* XCRemoteSwiftPackageReference "unisize-sdk-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Makip-DevKit/unisize-sdk-ios";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.6;
+				minimumVersion = 3.0.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		5D98B6CE2F4DC1CB007663B5 /* unisizeSDK */ = {
+		5DE0873E305912CE0066AA10 /* unisizeSDK */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 5D98B6CD2F4DC1CB007663B5 /* XCRemoteSwiftPackageReference "unisize-sdk-ios" */;
+			package = 5DE0873D305912CE0066AA10 /* XCRemoteSwiftPackageReference "unisize-sdk-ios" */;
 			productName = unisizeSDK;
 		};
 /* End XCSwiftPackageProductDependency section */

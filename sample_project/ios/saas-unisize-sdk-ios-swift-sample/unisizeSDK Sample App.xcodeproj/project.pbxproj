@@ -8,30 +8,29 @@
 
 /* Begin PBXBuildFile section */
 		5D6ABBD02C0D660C001C9DD5 /* CVTagTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6ABBCF2C0D660C001C9DD5 /* CVTagTestViewController.swift */; };
-		5D9CBBF72F4DB9460081BED4 /* unisizeSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 5D9CBBF62F4DB9460081BED4 /* unisizeSDK */; };
+		5DAA00022F5A0001000AUNN0 /* TopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAA00012F5A0001000AUNN0 /* TopViewController.swift */; };
+		5DAA00042F5A0001000AUNN0 /* AunnCoordinateTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAA00032F5A0001000AUNN0 /* AunnCoordinateTestViewController.swift */; };
+		5DAA00062F5A0001000AUNN0 /* AunnCoordinateWithUnisizeTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAA00052F5A0001000AUNN0 /* AunnCoordinateWithUnisizeTestViewController.swift */; };
+		5DAA00082F5A0001000AUNN0 /* AunnCoordinateGridViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAA00072F5A0001000AUNN0 /* AunnCoordinateGridViews.swift */; };
+		5DAA000A2F5A0001000AUNN0 /* CoordinateDetailDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAA00092F5A0001000AUNN0 /* CoordinateDetailDialog.swift */; };
+		5DAA000C2F5A0001000AUNN0 /* SampleImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAA000B2F5A0001000AUNN0 /* SampleImageLoader.swift */; };
 		5DDA91642C0561D00013CD13 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDA91632C0561D00013CD13 /* AppDelegate.swift */; };
 		5DDA91662C0561D00013CD13 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDA91652C0561D00013CD13 /* SceneDelegate.swift */; };
 		5DDA91682C0561D00013CD13 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDA91672C0561D00013CD13 /* ViewController.swift */; };
 		5DDA916B2C0561D00013CD13 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DDA91692C0561D00013CD13 /* Main.storyboard */; };
 		5DDA916D2C0561D20013CD13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DDA916C2C0561D20013CD13 /* Assets.xcassets */; };
 		5DDA91702C0561D20013CD13 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DDA916E2C0561D20013CD13 /* LaunchScreen.storyboard */; };
+		5DE0873C305911CA0066AA10 /* unisizeSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 5DE0873B305911CA0066AA10 /* unisizeSDK */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		5DC510682CDB0C0700EF172B /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		5D6ABBCF2C0D660C001C9DD5 /* CVTagTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVTagTestViewController.swift; sourceTree = "<group>"; };
+		5DAA00012F5A0001000AUNN0 /* TopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopViewController.swift; sourceTree = "<group>"; };
+		5DAA00032F5A0001000AUNN0 /* AunnCoordinateTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AunnCoordinateTestViewController.swift; sourceTree = "<group>"; };
+		5DAA00052F5A0001000AUNN0 /* AunnCoordinateWithUnisizeTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AunnCoordinateWithUnisizeTestViewController.swift; sourceTree = "<group>"; };
+		5DAA00072F5A0001000AUNN0 /* AunnCoordinateGridViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AunnCoordinateGridViews.swift; sourceTree = "<group>"; };
+		5DAA00092F5A0001000AUNN0 /* CoordinateDetailDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateDetailDialog.swift; sourceTree = "<group>"; };
+		5DAA000B2F5A0001000AUNN0 /* SampleImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleImageLoader.swift; sourceTree = "<group>"; };
 		5DDA91602C0561D00013CD13 /* unisizeSDK Sample App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "unisizeSDK Sample App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DDA91632C0561D00013CD13 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5DDA91652C0561D00013CD13 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -46,7 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5D9CBBF72F4DB9460081BED4 /* unisizeSDK in Frameworks */,
+				5DE0873C305911CA0066AA10 /* unisizeSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +82,12 @@
 				5DDA91632C0561D00013CD13 /* AppDelegate.swift */,
 				5DDA91652C0561D00013CD13 /* SceneDelegate.swift */,
 				5DDA91672C0561D00013CD13 /* ViewController.swift */,
+				5DAA00012F5A0001000AUNN0 /* TopViewController.swift */,
+				5DAA00032F5A0001000AUNN0 /* AunnCoordinateTestViewController.swift */,
+				5DAA00052F5A0001000AUNN0 /* AunnCoordinateWithUnisizeTestViewController.swift */,
+				5DAA00072F5A0001000AUNN0 /* AunnCoordinateGridViews.swift */,
+				5DAA00092F5A0001000AUNN0 /* CoordinateDetailDialog.swift */,
+				5DAA000B2F5A0001000AUNN0 /* SampleImageLoader.swift */,
 				5D6ABBCF2C0D660C001C9DD5 /* CVTagTestViewController.swift */,
 				5DDA91692C0561D00013CD13 /* Main.storyboard */,
 				5DDA916C2C0561D20013CD13 /* Assets.xcassets */,
@@ -101,7 +106,6 @@
 				5DDA915C2C0561D00013CD13 /* Sources */,
 				5DDA915D2C0561D00013CD13 /* Frameworks */,
 				5DDA915E2C0561D00013CD13 /* Resources */,
-				5DC510682CDB0C0700EF172B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -109,7 +113,7 @@
 			);
 			name = "unisizeSDK Sample App";
 			packageProductDependencies = (
-				5D9CBBF62F4DB9460081BED4 /* unisizeSDK */,
+				5DE0873B305911CA0066AA10 /* unisizeSDK */,
 			);
 			productName = "unisizeSDK Sample App";
 			productReference = 5DDA91602C0561D00013CD13 /* unisizeSDK Sample App.app */;
@@ -140,7 +144,7 @@
 			);
 			mainGroup = 5DDA91572C0561D00013CD13;
 			packageReferences = (
-				5D9CBBF52F4DB9460081BED4 /* XCRemoteSwiftPackageReference "unisize-sdk-ios" */,
+				5DE0873A305911CA0066AA10 /* XCRemoteSwiftPackageReference "unisize-sdk-ios" */,
 			);
 			productRefGroup = 5DDA91612C0561D00013CD13 /* Products */;
 			projectDirPath = "";
@@ -169,6 +173,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5DAA00022F5A0001000AUNN0 /* TopViewController.swift in Sources */,
+				5DAA00042F5A0001000AUNN0 /* AunnCoordinateTestViewController.swift in Sources */,
+				5DAA00062F5A0001000AUNN0 /* AunnCoordinateWithUnisizeTestViewController.swift in Sources */,
+				5DAA00082F5A0001000AUNN0 /* AunnCoordinateGridViews.swift in Sources */,
+				5DAA000A2F5A0001000AUNN0 /* CoordinateDetailDialog.swift in Sources */,
+				5DAA000C2F5A0001000AUNN0 /* SampleImageLoader.swift in Sources */,
 				5D6ABBD02C0D660C001C9DD5 /* CVTagTestViewController.swift in Sources */,
 				5DDA91682C0561D00013CD13 /* ViewController.swift in Sources */,
 				5DDA91642C0561D00013CD13 /* AppDelegate.swift in Sources */,
@@ -322,6 +332,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
@@ -338,7 +349,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.6;
+				MARKETING_VERSION = 3.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.co.makip.unisizeSDKSampleApp.unisizeSDK-Sample-App";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -357,6 +368,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
@@ -373,7 +385,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.6;
+				MARKETING_VERSION = 3.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.co.makip.unisizeSDKSampleApp.unisizeSDK-Sample-App";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -411,20 +423,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		5D9CBBF52F4DB9460081BED4 /* XCRemoteSwiftPackageReference "unisize-sdk-ios" */ = {
+		5DE0873A305911CA0066AA10 /* XCRemoteSwiftPackageReference "unisize-sdk-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Makip-DevKit/unisize-sdk-ios";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.6;
+				minimumVersion = 3.0.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		5D9CBBF62F4DB9460081BED4 /* unisizeSDK */ = {
+		5DE0873B305911CA0066AA10 /* unisizeSDK */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 5D9CBBF52F4DB9460081BED4 /* XCRemoteSwiftPackageReference "unisize-sdk-ios" */;
+			package = 5DE0873A305911CA0066AA10 /* XCRemoteSwiftPackageReference "unisize-sdk-ios" */;
 			productName = unisizeSDK;
 		};
 /* End XCSwiftPackageProductDependency section */

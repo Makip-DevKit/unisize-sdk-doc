@@ -2,11 +2,11 @@
 unisizeSDK for iOS Swift を使用して unisize の各機能を利用するための簡単なサンプルアプリケーションのプロジェクトです。
 unisizeSDK を Swift で実装する場合の実装サンプルとして、また、機能テスト用としてご利用いただけます。  
 
-※ 本プロジェクトの動作には unisizeSDK v2.0以降が必要です。
+※ 本プロジェクトの動作には unisizeSDK が必要です。
 ※ SDKに付属している「導入手順」「SDKリファレンス」も合わせてご確認ください。  
 
 ## 使用しているSDK
-* unisizeSDK for iOS Swift（v2.0以降）  
+* unisizeSDK for iOS Swift
   ※ unisizeSDK の利用には unisize が発行したクライアント識別ID（CID）が必要です。
 
 ## プロジェクト内の主なファイル
